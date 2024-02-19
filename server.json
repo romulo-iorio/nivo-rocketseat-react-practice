@@ -1,0 +1,64 @@
+{
+    "tags": [
+        {
+            "title": "React",
+            "amountOfVideos": 142
+        },
+        {
+            "title": "Vue",
+            "amountOfVideos": 85
+        },
+        {
+            "title": "Angular",
+            "amountOfVideos": 120
+        },
+        {
+            "title": "Ember",
+            "amountOfVideos": 50
+        },
+        {
+            "title": "Backbone",
+            "amountOfVideos": 30
+        },
+        {
+            "title": "Svelte",
+            "amountOfVideos": 10
+        },
+        {
+            "title": "Preact",
+            "amountOfVideos": 5
+        },
+        {
+            "title": "Aurelia",
+            "amountOfVideos": 3
+        },
+        {
+            "title": "Inferno",
+            "amountOfVideos": 2
+        },
+        {
+            "title": "Mithril",
+            "amountOfVideos": 1
+        },
+        {
+            "title": "Elm",
+            "amountOfVideos": 1
+        },
+        {
+            "title": "Polymer",
+            "amountOfVideos": 1
+        },
+        {
+            "title": "Riot",
+            "amountOfVideos": 1
+        },
+        {
+            "title": "Vanilla",
+            "amountOfVideos": 1
+        },
+        {
+            "title": "Sapper",
+            "amountOfVideos": 1
+        }
+    ]
+}
