@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Check, X } from "lucide-react";
 import { z } from "zod";
+import * as Dialog from "@radix-ui/react-dialog";
 
 import { Button } from "./ui/button";
 
@@ -51,10 +52,12 @@ export const CreateTagForm: React.FC = () => {
       </div>
 
       <div className="flex items-center justify-end gap-2">
-        <Button>
-          <X className="size-3" />
-          Cancel
-        </Button>
+        <Dialog.Close asChild>
+          <Button>
+            <X className="size-3" />
+            Cancel
+          </Button>
+        </Dialog.Close>
         <Button type="submit" className="bg-teal-400 text-teal-950">
           <Check className="size-3" />
           Save
