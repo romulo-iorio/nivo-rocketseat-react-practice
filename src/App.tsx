@@ -17,6 +17,7 @@ import { Button } from "./components/ui/button";
 import { Header } from "./components/header";
 import { Tabs } from "./components/tabs";
 import useDebounceValue from "./hooks/use-debounce-value";
+import * as Dialog from "@radix-ui/react-dialog";
 
 interface Tag {
   title: string;
@@ -79,9 +80,28 @@ export function App() {
       <main className="max-w-6xl mx-auto space-y-5">
         <div className="flex items-center gap-3">
           <h1 className="text-xl font-bold">Tags</h1>
-          <Button variant="primary">
-            <Plus className="size-3" /> Create new
-          </Button>
+
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <Button variant="primary">
+                <Plus className="size-3" /> Create new
+              </Button>
+            </Dialog.Trigger>
+          </Dialog.Root>
+
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 bg-black/70">
+              <Dialog.Content className="fixed right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-left border-zinc-900">
+                <Dialog.Title className="text-xl font-bold">
+                  Create Tag
+                </Dialog.Title>
+                <Dialog.Description className="text-sm text-zinc-500">
+                  Tags can be used to group videos about similar concepts.
+                </Dialog.Description>
+                <Dialog.Close asChild />
+              </Dialog.Content>
+            </Dialog.Overlay>
+          </Dialog.Portal>
         </div>
 
         <div className="flex items-center justify-between">
