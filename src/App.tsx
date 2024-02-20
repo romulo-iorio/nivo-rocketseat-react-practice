@@ -18,6 +18,7 @@ import { Header } from "./components/header";
 import { Tabs } from "./components/tabs";
 import useDebounceValue from "./hooks/use-debounce-value";
 import * as Dialog from "@radix-ui/react-dialog";
+import { CreateTagForm } from "./components/create-tag-form";
 
 interface Tag {
   title: string;
@@ -91,14 +92,17 @@ export function App() {
 
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 bg-black/70">
-              <Dialog.Content className="fixed right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-left border-zinc-900">
-                <Dialog.Title className="text-xl font-bold">
-                  Create Tag
-                </Dialog.Title>
-                <Dialog.Description className="text-sm text-zinc-500">
-                  Tags can be used to group videos about similar concepts.
-                </Dialog.Description>
-                <Dialog.Close asChild />
+              <Dialog.Content className="fixed right-0 top-0 bottom-0 h-screen min-w-[320px] z-10 bg-zinc-950 border-left border-zinc-900 p-10 space-y-10">
+                <div className="space-y-3">
+                  <Dialog.Title className="text-xl font-bold">
+                    Create Tag
+                  </Dialog.Title>
+                  <Dialog.Description className="text-sm text-zinc-500">
+                    Tags can be used to group videos about similar concepts.
+                  </Dialog.Description>
+                </div>
+
+                <CreateTagForm />
               </Dialog.Content>
             </Dialog.Overlay>
           </Dialog.Portal>
