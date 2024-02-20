@@ -63,7 +63,6 @@ export const CreateTagForm: React.FC = () => {
           Slug
         </label>
         <input
-          {...register("slug")}
           className="border-zinc-580 rounded-lg px-3 py-2 bg-zinc-800/50 w-full"
           type="text"
           id="slug"
