@@ -3,15 +3,28 @@ import { Button } from "./ui/button";
 
 export const CreateTagForm: React.FC = () => {
   return (
-    <form className="w-full">
-      <div>
-        <label>Tag name</label>
-        <input type="text" />
+    <form className="w-full space-y-6">
+      <div className="space-2">
+        <label className="text-sm font-medium" htmlFor="name">
+          Tag name
+        </label>
+        <input
+          className="border-zinc-580 rounded-lg px-3 py-2"
+          type="text"
+          id="name"
+        />
       </div>
 
-      <div>
-        <label>Slug</label>
-        <input type="text" readOnly />
+      <div className="space-2">
+        <label className="text-sm font-medium" htmlFor="slug">
+          Slug
+        </label>
+        <input
+          className="border-zinc-580 rounded-lg px-3 py-2"
+          type="text"
+          id="slug"
+          readOnly
+        />
       </div>
 
       <div className="flex items-center justify-end gap-2">
