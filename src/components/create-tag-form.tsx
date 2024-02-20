@@ -1,14 +1,34 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { Check, X } from "lucide-react";
+import { z } from "zod";
+
 import { Button } from "./ui/button";
 
+const createTagSchema = z.object({
+  name: z
+    .string()
+    .min(3, { message: "Tag name must be at least 3 characters long." }),
+  slug: z.string(),
+});
+
 export const CreateTagForm: React.FC = () => {
+  const { register, handleSubmit } = useForm({
+    resolver: zodResolver(createTagSchema),
+  });
+
+  const createTag = (data) => {
+    console.log(data);
+  };
+
   return (
-    <form className="w-full space-y-6">
+    <form onSubmit={handleSubmit(createTag)} className="w-full space-y-6">
       <div className="space-y-2">
         <label className="text-sm font-medium block" htmlFor="name">
           Tag name
         </label>
         <input
+          {...register("name")}
           className="border-zinc-580 rounded-lg px-3 py-2 bg-zinc-800/50 w-full"
           type="text"
           id="name"
@@ -20,6 +40,7 @@ export const CreateTagForm: React.FC = () => {
           Slug
         </label>
         <input
+          {...register("slug")}
           className="border-zinc-580 rounded-lg px-3 py-2 bg-zinc-800/50 w-full"
           type="text"
           id="slug"
