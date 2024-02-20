@@ -12,12 +12,14 @@ const createTagSchema = z.object({
   slug: z.string(),
 });
 
+type CreateTagFormData = z.infer<typeof createTagSchema>;
+
 export const CreateTagForm: React.FC = () => {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<CreateTagFormData>({
     resolver: zodResolver(createTagSchema),
   });
 
-  const createTag = (data) => {
+  const createTag = (data: CreateTagFormData) => {
     console.log(data);
   };
 
