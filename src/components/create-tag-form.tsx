@@ -1,10 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Check, X } from "lucide-react";
+import { Check, Loader2, X } from "lucide-react";
 import { z } from "zod";
 import * as Dialog from "@radix-ui/react-dialog";
 
 import { Button } from "./ui/button";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const createTagSchema = z.object({
   title: z
@@ -26,23 +27,43 @@ const getSlugFromString = (str: string) => {
 };
 
 export const CreateTagForm: React.FC = () => {
-  const { register, handleSubmit, watch } = useForm<CreateTagFormData>({
-    resolver: zodResolver(createTagSchema),
-  });
+  const queryClient = useQueryClient();
+
+  const { register, handleSubmit, watch, formState } =
+    useForm<CreateTagFormData>({
+      resolver: zodResolver(createTagSchema),
+    });
 
   const slug = getSlugFromString(watch("title"));
 
+  const { mutateAsync: createTagMutation } = useMutation({
+    mutationFn: async ({ title }: CreateTagFormData) => {
+      await fetch("http://localhost:3333/tags", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          slug,
+          amountOfVideos: 0,
+        }),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["tags"],
+      });
+    },
+  });
+
   const createTag = async ({ title }: CreateTagFormData) => {
-    await fetch("http://localhost:3333/tags", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title,
-        slug,
-        amountOfVideos: 0,
-      }),
-    });
+    await createTagMutation({ title });
   };
+
+  const SubmitButtonIcon = formState.isSubmitting ? (
+    <Loader2 className="size-3 animate-spin" />
+  ) : (
+    <Check className="size-3" />
+  );
 
   return (
     <form onSubmit={handleSubmit(createTag)} className="w-full space-y-6">
@@ -56,6 +77,12 @@ export const CreateTagForm: React.FC = () => {
           type="text"
           id="title"
         />
+
+        {formState.errors.title && (
+          <p className="text-sm text-red-400">
+            {formState.errors.title.message}
+          </p>
+        )}
       </div>
 
       <div className="space-y-2">
@@ -78,8 +105,12 @@ export const CreateTagForm: React.FC = () => {
             Cancel
           </Button>
         </Dialog.Close>
-        <Button type="submit" className="bg-teal-400 text-teal-950">
-          <Check className="size-3" />
+        <Button
+          className="bg-teal-400 text-teal-950"
+          type="submit"
+          disabled={formState.isSubmitting}
+        >
+          {SubmitButtonIcon}
           Save
         </Button>
       </div>
