@@ -7,34 +7,54 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 
 const createTagSchema = z.object({
-  name: z
+  title: z
     .string()
-    .min(3, { message: "Tag name must be at least 3 characters long." }),
-  slug: z.string(),
+    .min(3, { message: "Tag title must be at least 3 characters long." }),
 });
 
 type CreateTagFormData = z.infer<typeof createTagSchema>;
 
+const getSlugFromString = (str: string) => {
+  if (!str) return str;
+
+  return str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s]+/g, "")
+    .replace(/[^a-z0-9]+/g, "-");
+};
+
 export const CreateTagForm: React.FC = () => {
-  const { register, handleSubmit } = useForm<CreateTagFormData>({
+  const { register, handleSubmit, watch } = useForm<CreateTagFormData>({
     resolver: zodResolver(createTagSchema),
   });
 
-  const createTag = (data: CreateTagFormData) => {
-    console.log(data);
+  const slug = getSlugFromString(watch("title"));
+
+  const createTag = async ({ title }: CreateTagFormData) => {
+    await fetch("http://localhost:3333/tags", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        slug,
+        amountOfVideos: 0,
+      }),
+    });
   };
 
   return (
     <form onSubmit={handleSubmit(createTag)} className="w-full space-y-6">
       <div className="space-y-2">
-        <label className="text-sm font-medium block" htmlFor="name">
+        <label className="text-sm font-medium block" htmlFor="title">
           Tag name
         </label>
         <input
-          {...register("name")}
+          {...register("title")}
           className="border-zinc-580 rounded-lg px-3 py-2 bg-zinc-800/50 w-full"
           type="text"
-          id="name"
+          id="title"
         />
       </div>
 
@@ -47,6 +67,7 @@ export const CreateTagForm: React.FC = () => {
           className="border-zinc-580 rounded-lg px-3 py-2 bg-zinc-800/50 w-full"
           type="text"
           id="slug"
+          value={slug}
           readOnly
         />
       </div>

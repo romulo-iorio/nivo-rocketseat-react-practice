@@ -2,62 +2,77 @@
     "tags": [
         {
             "title": "React",
+            "slug": "old",
             "amountOfVideos": 142
         },
         {
             "title": "Vue",
+            "slug": "old",
             "amountOfVideos": 85
         },
         {
             "title": "Angular",
+            "slug": "old",
             "amountOfVideos": 120
         },
         {
             "title": "Ember",
+            "slug": "old",
             "amountOfVideos": 50
         },
         {
             "title": "Backbone",
+            "slug": "old",
             "amountOfVideos": 30
         },
         {
             "title": "Svelte",
+            "slug": "old",
             "amountOfVideos": 10
         },
         {
             "title": "Preact",
+            "slug": "old",
             "amountOfVideos": 5
         },
         {
             "title": "Aurelia",
+            "slug": "old",
             "amountOfVideos": 3
         },
         {
             "title": "Inferno",
+            "slug": "old",
             "amountOfVideos": 2
         },
         {
             "title": "Mithril",
+            "slug": "old",
             "amountOfVideos": 1
         },
         {
             "title": "Elm",
+            "slug": "old",
             "amountOfVideos": 1
         },
         {
             "title": "Polymer",
+            "slug": "old",
             "amountOfVideos": 1
         },
         {
             "title": "Riot",
+            "slug": "old",
             "amountOfVideos": 1
         },
         {
             "title": "Vanilla",
+            "slug": "old",
             "amountOfVideos": 1
         },
         {
             "title": "Sapper",
+            "slug": "old",
             "amountOfVideos": 1
         }
     ]
