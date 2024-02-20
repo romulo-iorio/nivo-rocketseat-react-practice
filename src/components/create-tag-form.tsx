@@ -4,23 +4,23 @@ import { Button } from "./ui/button";
 export const CreateTagForm: React.FC = () => {
   return (
     <form className="w-full space-y-6">
-      <div className="space-2">
-        <label className="text-sm font-medium" htmlFor="name">
+      <div className="space-y-2">
+        <label className="text-sm font-medium block" htmlFor="name">
           Tag name
         </label>
         <input
-          className="border-zinc-580 rounded-lg px-3 py-2"
+          className="border-zinc-580 rounded-lg px-3 py-2 bg-zinc-800/50 w-full"
           type="text"
           id="name"
         />
       </div>
 
-      <div className="space-2">
-        <label className="text-sm font-medium" htmlFor="slug">
+      <div className="space-y-2">
+        <label className="text-sm font-medium block" htmlFor="slug">
           Slug
         </label>
         <input
-          className="border-zinc-580 rounded-lg px-3 py-2"
+          className="border-zinc-580 rounded-lg px-3 py-2 bg-zinc-800/50 w-full"
           type="text"
           id="slug"
           readOnly
